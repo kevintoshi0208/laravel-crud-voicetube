@@ -21,7 +21,8 @@ class TodoList extends Model
         'attachment',
         'file_name',
         'file_path',
-        'mime_type'
+        'mime_type',
+        'done_At'
     ];
 
 }
