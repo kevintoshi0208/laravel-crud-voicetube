@@ -1,0 +1,4 @@
+[2021-06-24 11:46:36] local.ERROR: Illuminate\Routing\RouteFileRegistrar::register(): Failed opening required 'Array' (include_path='.:/usr/local/lib/php') {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Illuminate\\Routing\\RouteFileRegistrar::register(): Failed opening required 'Array' (include_path='.:/usr/local/lib/php') at /var/www/vendor/laravel/framework/src/Illuminate/Routing/RouteFileRegistrar.php:35)
+[stacktrace]
+#0 {main}
+"} 
