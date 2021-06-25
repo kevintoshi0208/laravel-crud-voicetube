@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TodoList;
 use Illuminate\Http\Request;
 
 class TodoListController extends Controller
@@ -13,7 +14,7 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        //
+        return TodoList::all();
     }
 
     /**
@@ -24,7 +25,12 @@ class TodoListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:140',
+            'content' => 'required',
+        ]);
+
+        return TodoList::create($request->all());
     }
 
     /**
@@ -35,7 +41,7 @@ class TodoListController extends Controller
      */
     public function show($id)
     {
-        //
+        return TodoList::find($id);
     }
 
     /**
@@ -47,7 +53,10 @@ class TodoListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = TodoList::findOrFail($id);
+        $article->update($request->all());
+
+        return $article;
     }
 
     /**
@@ -58,6 +67,8 @@ class TodoListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TodoList::find($id)->delete();
+
+        return 204;
     }
 }

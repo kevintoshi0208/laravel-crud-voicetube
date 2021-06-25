@@ -13,16 +13,27 @@ class TodoList extends Model
 
     protected $keyType = 'string';
 
-    protected $dateFormat = 'U';
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 
-    protected $fillable = [
+    protected $fillable  = [
         'title',
         'content',
         'attachment',
         'file_name',
         'file_path',
         'mime_type',
-        'done_At'
+        'done_at'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'done_at'
     ];
 
 }
