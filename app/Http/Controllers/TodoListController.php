@@ -69,6 +69,6 @@ class TodoListController extends Controller
     {
         TodoList::find($id)->delete();
 
-        return 204;
+        return response(null, 204);
     }
 }
