@@ -58,14 +58,12 @@ root# php artisan test
  POST      | api/auth/logout                     |JWT Logout                   |                                                            |
  POST      | api/auth/me                         |JWT Get The Auth             |                                                            |
  POST      | api/auth/refresh                    |JWT refresh                  |                                                            |
-           |                                     |                             |                                                            |
  GET HEAD  | api/todoLists                       |Get List of TodoList         |  Search Conditions: title,content,done_at[gte],done_at[lte]. Example: /api/todoLists?title=This&paginate=10&page=2&doneAt[gte]=2021-06-01&doneAt[lte]=2021-06-30 |
  POST      | api/todoLists                       |Create TodoList              |  link the relationship of attachment with parameter "attachment" in json                                                          |
  GET HEAD  | api/todoLists/{todoList}            |Get TodoList                 |                                                            |
  PUT PATCH | api/todoLists/{todoList}            |Update TodoList              |  link the relationship of attachment with parameter "attachment" in json                                                        |
  DELETE    | api/todoLists/{todoList}            |Delete TodoList              |                                                            |
  GET HEAD  | api/user                            |Get Current User             |                                                            |
-           |                                     |                             |                                                            |
  POST      | api/todoListAttachment              |Create TodoList Attachment   |  It's a normal upload api not a json api , you can upload file with request field "file"  |                                                            |
  GET HEAD  | api/todoListAttachment/{id}         |Get TodoList Attachment      |                                                            |
  DELETE    | api/todoListAttachment/{id}         |Delete TodoList Attachment   |                                                            |
