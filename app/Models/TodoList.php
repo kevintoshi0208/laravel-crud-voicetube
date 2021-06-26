@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use http\Client\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class TodoList extends Model
 {
@@ -14,6 +12,8 @@ class TodoList extends Model
     public $incrementing = true;
 
     protected $keyType = 'string';
+
+    protected $hidden = ['todo_list_attachment_id'];
 
     /**
      * Indicates if the model should be timestamped.

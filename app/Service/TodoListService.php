@@ -10,7 +10,7 @@ class TodoListService
 {
     public function findBySearchCondition(Request $request)
     {
-        $qb = TodoList::query()::with('attachment');
+        $qb = TodoList::query()->with('attachment');
 
         $searchTitle = $request->get("title");
         if ($searchTitle){
