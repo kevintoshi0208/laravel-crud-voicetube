@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TodoListAttachmentController;
 use App\Http\Controllers\TodoListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources( [
-    'todoLists'=>TodoListController::class
+    'todoLists'=> TodoListController::class,
 ],[
     'middleware'=> 'auth:api'
 ]);
@@ -35,3 +36,13 @@ Route::middleware(['api'])
         Route::post('/me', [AuthController::class,'me']);
     })
 ;
+
+Route::middleware(['auth:api'])
+    ->group(function (){
+        Route::post('/todoListAttachment', [TodoListAttachmentController::class,'store']);
+        Route::get('/todoListAttachment/{id}/download', [TodoListAttachmentController::class,'download']);
+        Route::get('/todoListAttachment/{id}', [TodoListAttachmentController::class,'show']);
+        Route::delete('/todoListAttachment/{id}', [TodoListAttachmentController::class,'delete']);
+    })
+;
+

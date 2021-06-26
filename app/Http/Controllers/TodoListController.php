@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TodoList;
+use App\Models\TodoListAttachment;
 use App\Service\TodoListService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,14 @@ class TodoListController extends Controller
             'done_at' => 'date'
         ]);
 
-        return TodoList::create($request->all());
+
+        $todoList =  TodoList::create($request->except(['attachment']));
+        $attachmentId = $request->get("attachment");
+        if ($attachmentId){
+            $todoList->attachment()->associate(TodoListAttachment::find($attachmentId));
+        }
+        $todoList->save();
+        return $todoList;
     }
 
     /**

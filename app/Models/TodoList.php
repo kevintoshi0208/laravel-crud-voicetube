@@ -26,9 +26,6 @@ class TodoList extends Model
         'title',
         'content',
         'attachment',
-        'file_name',
-        'file_path',
-        'mime_type',
         'done_at'
     ];
 
@@ -61,11 +58,9 @@ class TodoList extends Model
         $qb->where('done_at','<=',$date);
     }
 
-    /**
-     * Get the phone associated with the user.
-     */
+
     public function attachment()
     {
-        return $this->hasOne(TodoListAttchment::class);
+        return $this->belongsTo(TodoListAttachment::class,'todo_list_attachment_id');
     }
 }

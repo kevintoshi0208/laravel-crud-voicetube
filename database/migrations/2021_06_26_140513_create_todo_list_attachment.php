@@ -13,7 +13,7 @@ class CreateTodoListAttachment extends Migration
      */
     public function up()
     {
-        Schema::create('todo_list_attachment', function (Blueprint $table) {
+        Schema::create('todo_list_attachments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('file_path',140);
@@ -26,9 +26,9 @@ class CreateTodoListAttachment extends Migration
             $table->dropColumn('mimetype');
             $table->dropColumn('attachment');
             $table->dropColumn('file_name');
-            $table->unsignedBigInteger('todo_list_attachment_id');
+            $table->unsignedBigInteger('todo_list_attachment_id')->nullable();
             $table->foreign('todo_list_attachment_id')
-                ->references('id')->on('todo_list_attachment');
+                ->references('id')->on('todo_list_attachments');
         });
     }
 
