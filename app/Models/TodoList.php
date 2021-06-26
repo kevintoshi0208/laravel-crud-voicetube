@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use http\Client\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class TodoList extends Model
 {
@@ -36,4 +38,26 @@ class TodoList extends Model
         'done_at'
     ];
 
+    public function scopeTitle($qb,$title)
+    {
+        $qb->where('title','like','%'.$title.'%');
+    }
+
+    public function scopeContent($qb,$content)
+    {
+        $qb->where('content','like','%'.$content.'%');
+    }
+
+    public function scopePaginate($qb,$page)
+    {
+        $qb->paginate($page);
+    }
+
+    public function scopeDoneAtGte($qb,$date){
+        $qb->where('done_at','>=',$date);
+    }
+
+    public function scopeDoneAtLte($qb,$date){
+        $qb->where('done_at','<=',$date);
+    }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\TodoList;
+use App\Service\TodoListService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TodoListController extends Controller
 {
@@ -12,9 +14,9 @@ class TodoListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request,TodoListService $listService)
     {
-        return TodoList::all();
+        return  $listService->findBySearchCondition($request);
     }
 
     /**
@@ -28,6 +30,7 @@ class TodoListController extends Controller
         $request->validate([
             'title' => 'required|max:140',
             'content' => 'required',
+            'done_at' => 'date'
         ]);
 
         return TodoList::create($request->all());
@@ -53,6 +56,12 @@ class TodoListController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:140',
+            'content' => 'required',
+            'done_at' => 'date'
+        ]);
+
         $article = TodoList::findOrFail($id);
         $article->update($request->all());
 
