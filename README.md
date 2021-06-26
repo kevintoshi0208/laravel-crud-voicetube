@@ -17,7 +17,7 @@ root# php artisan db:seed
 
 ## Default Account
 
-email: kevintoshi0208@gmail.com
+email: kevintoshi0208@gmail.com  
 password: password
 
 ## How to Get The Token 
