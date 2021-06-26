@@ -60,4 +60,12 @@ class TodoList extends Model
     public function scopeDoneAtLte($qb,$date){
         $qb->where('done_at','<=',$date);
     }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function attachment()
+    {
+        return $this->hasOne(TodoListAttchment::class);
+    }
 }
