@@ -39,14 +39,14 @@ class CreateTodoListAttachment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todo_list_attachment');
-
         Schema::table('todo_lists', function(Blueprint $table) {
             $table->string('file_path',140);
             $table->string('mimetype',140);
             $table->mediumText('attachment');
             $table->string('file_name',140);
-            $table->dropColumn('todo_list_attachment_id');
+            $table->dropConstrainedForeignId('todo_list_attachment_id');
         });
+
+        Schema::dropIfExists('todo_list_attachments');
     }
 }

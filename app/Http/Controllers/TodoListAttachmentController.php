@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TodoList;
 use App\Models\TodoListAttachment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TodoListAttachmentController extends Controller
 {
@@ -30,7 +31,6 @@ class TodoListAttachmentController extends Controller
         $storeName = hash("sha256",$file->getClientOriginalName());
         $todoListAttachment->file_path = $destinationPath."/".$storeName;
 
-
         $todoListAttachment->mimetype = $file->getMimeType();
 
         $file->move($destinationPath,$storeName);
@@ -47,7 +47,7 @@ class TodoListAttachmentController extends Controller
      */
     public function show($id)
     {
-        return TodoListAttachment::find($id);
+        return TodoListAttachment::findOrFail($id);
         return response(null, 204);
     }
 
@@ -59,7 +59,9 @@ class TodoListAttachmentController extends Controller
      */
     public function download($id)
     {
-        $todoListAttachment =  TodoListAttachment::find($id);
+        $todoListAttachment =  TodoListAttachment::findOrFail($id);
+
+        Gate::authorize('show-todoLis-attachment', $todoListAttachment);
 
         return response()->download(
             $todoListAttachment->file_path,
@@ -78,7 +80,10 @@ class TodoListAttachmentController extends Controller
      */
     public function destroy($id)
     {
-        TodoListAttachment::find($id)->delete();
+        $todoListAttachment = TodoListAttachment::find($id);
+        Gate::authorize('destroy-todoLis-attachment', $todoListAttachment);
+        $todoListAttachment->delete();
+
         return response(null, 204);
     }
 }

@@ -31,5 +31,7 @@ class TodoListAttachment extends Model
         return $this->hasOne(TodoList::class,'todo_list_attachment_id','id');
     }
 
-
+    public function createdUser(){
+        return $this->belongsTo(User::class,'created_user_id');
+    }
 }

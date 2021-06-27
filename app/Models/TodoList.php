@@ -58,9 +58,12 @@ class TodoList extends Model
         $qb->where('done_at','<=',$date);
     }
 
-
     public function attachment()
     {
         return $this->belongsTo(TodoListAttachment::class,'todo_list_attachment_id');
+    }
+
+    public function createdUser(){
+        return $this->belongsTo(User::class,'created_user_id');
     }
 }

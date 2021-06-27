@@ -25,6 +25,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update-todoLis', function ($user, $todoList) {
+            return $todoList->createdUser && $user->id === $todoList->createdUser->id;
+        });
+
+        Gate::define('destroy-todoLis', function ($user, $todoList) {
+            return $todoList->createdUser && $user->id === $todoList->createdUser->id;
+        });
+
+        Gate::define('show-todoLis-attachment', function ($user, $todoListAttachment) {
+            return $todoListAttachment->createdUser && $user->id === $todoListAttachment->createdUser->id;
+        });
+
+        Gate::define('destroy-todoLis-attachment', function ($user, $todoListAttachment) {
+            return $todoListAttachment->createdUser && $user->id === $todoListAttachment->createdUser->id;
+        });
     }
 }

@@ -7,6 +7,7 @@ use App\Models\TodoListAttachment;
 use App\Service\TodoListService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class TodoListController extends Controller
 {
@@ -70,8 +71,11 @@ class TodoListController extends Controller
             'done_at' => 'date'
         ]);
 
-        $article = TodoList::findOrFail($id);
-        $article->update($request->all());
+        $todoList = TodoList::findOrFail($id);
+
+        Gate::authorize('show-todoLis-attachment', $todoList);
+
+        $todoList->update($request->all());
 
         return $article;
     }
@@ -84,7 +88,9 @@ class TodoListController extends Controller
      */
     public function destroy($id)
     {
-        TodoList::find($id)->delete();
+        $todoList = TodoList::find($id);
+        Gate::authorize('destroy-todoLis-attachment', $todoList);
+        $todoList->delete();
 
         return response(null, 204);
     }
